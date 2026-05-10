@@ -527,7 +527,7 @@ const SortableRow = ({
             value={row.weight}
             maxLength={8}
             onChange={(e) => onWeight(e.target.value)}
-            className="min-w-0"
+            className="w-[56px] shrink-0"
           />
           <Select value={row.unit || "gram"} onValueChange={onUnit}>
             <SelectTrigger className="w-[52px] shrink-0 px-2">

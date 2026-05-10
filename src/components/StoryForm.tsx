@@ -65,7 +65,11 @@ const PRODUCT_SUGGESTIONS = [
   "Galeri24",
 ];
 
-const UNITS = ["gram", "kg", "oz"];
+const UNIT_OPTIONS = [
+  { value: "gram", label: "g" },
+  { value: "kg", label: "kg" },
+  { value: "oz", label: "oz" },
+];
 
 export const StoryForm = ({ data, onChange }: Props) => {
   const update = <K extends keyof StoryData>(key: K, value: StoryData[K]) =>
@@ -505,8 +509,8 @@ const SortableRow = ({
 
   return (
     <div ref={setNodeRef} style={style} className="bg-card/50 rounded-md p-1">
-      {/* Mobile: 2-row layout */}
-      <div className="flex flex-col gap-1 sm:hidden">
+      {/* Mobile: 1 baris utama + copy/delete di bawah harga */}
+      <div className="flex flex-col gap-0.5 sm:hidden">
         <div className="flex items-center gap-1.5">
           <button
             type="button"
@@ -526,47 +530,23 @@ const SortableRow = ({
             className="min-w-0"
           />
           <Select value={row.unit || "gram"} onValueChange={onUnit}>
-            <SelectTrigger className="w-[70px] shrink-0">
+            <SelectTrigger className="w-[52px] shrink-0 px-2">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {UNITS.map((u) => (
-                <SelectItem key={u} value={u}>{u}</SelectItem>
+              {UNIT_OPTIONS.map(({ value, label }) => (
+                <SelectItem key={value} value={value}>{label}</SelectItem>
               ))}
             </SelectContent>
           </Select>
-          <div className="flex items-center shrink-0">
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              onClick={onDuplicate}
-              className="h-8 w-8 text-muted-foreground hover:text-foreground"
-              aria-label="Duplikat"
-            >
-              <Copy className="w-3.5 h-3.5" />
-            </Button>
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              onClick={onDelete}
-              className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
-              aria-label="Hapus"
-            >
-              <Trash2 className="w-3.5 h-3.5" />
-            </Button>
-          </div>
-        </div>
-        <div className="pl-7">
-          <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">
+          <div className="relative flex-1 min-w-0">
+            <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">
               Rp
             </span>
             <Input
               inputMode="numeric"
               placeholder="1.125.000"
-              className="pl-9"
+              className="pl-8 min-w-0"
               value={formatThousand(row.price)}
               onChange={(e) => onPrice(e.target.value)}
               onKeyDown={(e) => {
@@ -578,9 +558,31 @@ const SortableRow = ({
             />
           </div>
         </div>
+        <div className="flex justify-end">
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={onDuplicate}
+            className="h-7 w-8 text-muted-foreground hover:text-foreground"
+            aria-label="Duplikat"
+          >
+            <Copy className="w-3 h-3" />
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={onDelete}
+            className="h-7 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
+            aria-label="Hapus"
+          >
+            <Trash2 className="w-3 h-3" />
+          </Button>
+        </div>
       </div>
 
-      {/* Desktop: original single-row grid */}
+      {/* Desktop: single-row grid */}
       <div className="hidden sm:grid grid-cols-[auto_1fr_auto_1.4fr_auto] gap-2 items-center">
         <button
           type="button"
@@ -599,12 +601,12 @@ const SortableRow = ({
           onChange={(e) => onWeight(e.target.value)}
         />
         <Select value={row.unit || "gram"} onValueChange={onUnit}>
-          <SelectTrigger className="w-[88px]">
+          <SelectTrigger className="w-[72px]">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            {UNITS.map((u) => (
-              <SelectItem key={u} value={u}>{u}</SelectItem>
+            {UNIT_OPTIONS.map(({ value, label }) => (
+              <SelectItem key={value} value={value}>{label}</SelectItem>
             ))}
           </SelectContent>
         </Select>

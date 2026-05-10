@@ -233,7 +233,7 @@ export const StoryForm = ({ data, onChange }: Props) => {
           </span>
         </div>
 
-        <div className="grid grid-cols-[auto_1fr_auto_1.4fr_auto] gap-2 px-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+        <div className="hidden sm:grid grid-cols-[auto_1fr_auto_1.4fr_auto] gap-2 px-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
           <span className="w-6" />
           <span>Berat</span>
           <span>Unit</span>
@@ -504,79 +504,151 @@ const SortableRow = ({
   };
 
   return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      className="grid grid-cols-[auto_1fr_auto_1.4fr_auto] gap-2 items-center bg-card/50 rounded-md p-1"
-    >
-      <button
-        type="button"
-        {...attributes}
-        {...listeners}
-        className="w-6 h-9 flex items-center justify-center text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing touch-none"
-        aria-label="Drag row"
-      >
-        <GripVertical className="w-4 h-4" />
-      </button>
-      <Input
-        inputMode="decimal"
-        placeholder="1"
-        value={row.weight}
-        maxLength={8}
-        onChange={(e) => onWeight(e.target.value)}
-      />
-      <Select value={row.unit || "gram"} onValueChange={onUnit}>
-        <SelectTrigger className="w-[88px]">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          {UNITS.map((u) => (
-            <SelectItem key={u} value={u}>
-              {u}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      <div className="relative">
-        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">
-          Rp
-        </span>
-        <Input
-          ref={priceRef}
-          inputMode="numeric"
-          placeholder="1.125.000"
-          className="pl-9"
-          value={formatThousand(row.price)}
-          onChange={(e) => onPrice(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              onEnter();
-            }
-          }}
-        />
+    <div ref={setNodeRef} style={style} className="bg-card/50 rounded-md p-1">
+      {/* Mobile: 2-row layout */}
+      <div className="flex flex-col gap-1 sm:hidden">
+        <div className="flex items-center gap-1.5">
+          <button
+            type="button"
+            {...attributes}
+            {...listeners}
+            className="w-6 h-9 flex items-center justify-center text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing touch-none shrink-0"
+            aria-label="Drag row"
+          >
+            <GripVertical className="w-4 h-4" />
+          </button>
+          <Input
+            inputMode="decimal"
+            placeholder="1"
+            value={row.weight}
+            maxLength={8}
+            onChange={(e) => onWeight(e.target.value)}
+            className="min-w-0"
+          />
+          <Select value={row.unit || "gram"} onValueChange={onUnit}>
+            <SelectTrigger className="w-[70px] shrink-0">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {UNITS.map((u) => (
+                <SelectItem key={u} value={u}>{u}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <div className="flex items-center shrink-0">
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={onDuplicate}
+              className="h-8 w-8 text-muted-foreground hover:text-foreground"
+              aria-label="Duplikat"
+            >
+              <Copy className="w-3.5 h-3.5" />
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={onDelete}
+              className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
+              aria-label="Hapus"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+            </Button>
+          </div>
+        </div>
+        <div className="pl-7">
+          <div className="relative">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">
+              Rp
+            </span>
+            <Input
+              inputMode="numeric"
+              placeholder="1.125.000"
+              className="pl-9"
+              value={formatThousand(row.price)}
+              onChange={(e) => onPrice(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  onEnter();
+                }
+              }}
+            />
+          </div>
+        </div>
       </div>
-      <div className="flex items-center">
-        <Button
+
+      {/* Desktop: original single-row grid */}
+      <div className="hidden sm:grid grid-cols-[auto_1fr_auto_1.4fr_auto] gap-2 items-center">
+        <button
           type="button"
-          variant="ghost"
-          size="icon"
-          onClick={onDuplicate}
-          className="h-8 w-8 text-muted-foreground hover:text-foreground"
-          aria-label="Duplikat"
+          {...attributes}
+          {...listeners}
+          className="w-6 h-9 flex items-center justify-center text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing touch-none"
+          aria-label="Drag row"
         >
-          <Copy className="w-3.5 h-3.5" />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          onClick={onDelete}
-          className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
-          aria-label="Hapus"
-        >
-          <Trash2 className="w-3.5 h-3.5" />
-        </Button>
+          <GripVertical className="w-4 h-4" />
+        </button>
+        <Input
+          inputMode="decimal"
+          placeholder="1"
+          value={row.weight}
+          maxLength={8}
+          onChange={(e) => onWeight(e.target.value)}
+        />
+        <Select value={row.unit || "gram"} onValueChange={onUnit}>
+          <SelectTrigger className="w-[88px]">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {UNITS.map((u) => (
+              <SelectItem key={u} value={u}>{u}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <div className="relative">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">
+            Rp
+          </span>
+          <Input
+            ref={priceRef}
+            inputMode="numeric"
+            placeholder="1.125.000"
+            className="pl-9"
+            value={formatThousand(row.price)}
+            onChange={(e) => onPrice(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                onEnter();
+              }
+            }}
+          />
+        </div>
+        <div className="flex items-center">
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={onDuplicate}
+            className="h-8 w-8 text-muted-foreground hover:text-foreground"
+            aria-label="Duplikat"
+          >
+            <Copy className="w-3.5 h-3.5" />
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={onDelete}
+            className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
+            aria-label="Hapus"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -37,9 +37,10 @@ export const PreviewFrame = ({ children }: PreviewFrameProps) => {
       className="rounded-[1.5rem] shadow-story ring-1 ring-primary/15 bg-background overflow-hidden"
       style={{
         width: "min(100%, 380px)",
-        maxHeight: "82vh",
+        maxHeight: "75vh",
         overflowY: "auto",
         position: "relative",
+        WebkitOverflowScrolling: "touch",
       }}
     >
       <div

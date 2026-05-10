@@ -255,14 +255,14 @@ const Index = () => {
 
             <StoryForm data={data} onChange={setData} />
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-7">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-7">
               <Button
                 onClick={handleGenerate}
                 disabled={!canGenerate}
-                className="h-12 text-base font-semibold bg-gold hover:opacity-90 shadow-gold transition-smooth"
+                className="col-span-2 sm:col-span-1 h-12 text-base font-semibold bg-gold hover:opacity-90 shadow-gold transition-smooth"
               >
                 <Wand2 className="w-4 h-4 mr-2" />
-                Generate
+                Generate Story
               </Button>
               <Button
                 onClick={handleDownload}

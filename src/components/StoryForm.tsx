@@ -224,13 +224,13 @@ export const StoryForm = ({ data, onChange }: Props) => {
                 }
               />
             </div>
-            <div className="flex items-start gap-2 rounded-md border border-border/60 bg-muted/40 px-3 py-2">
-              <span className="text-muted-foreground mt-0.5 shrink-0 text-[13px]">ℹ️</span>
-              <p className="text-[11px] text-muted-foreground leading-snug">
-                Kosongkan jika tidak ada pergerakan harga hari ini.
-              </p>
-            </div>
           </div>
+        </div>
+        <div className="flex items-start gap-2 rounded-md border border-border/60 bg-muted/40 px-3 py-2">
+          <span className="text-muted-foreground mt-0.5 shrink-0 text-[13px]">ℹ️</span>
+          <p className="text-[11px] text-muted-foreground leading-snug">
+            Kosongkan jika tidak ada pergerakan harga hari ini.
+          </p>
         </div>
       </section>
 

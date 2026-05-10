@@ -106,3 +106,15 @@
     box-shadow: var(--shadow-story);
   }
 }
+
+input[type="date"] {
+  display: flex;
+  align-items: center;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  margin-left: auto;
+  opacity: 0.5;
+  cursor: pointer;
+  flex-shrink: 0;
+}

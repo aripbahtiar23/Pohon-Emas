@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Pohon Emas — warm cream + cocoa + antique gold */
+    --background: 36 35% 91%;          /* #F2EBDD */
+    --foreground: 28 49% 16%;          /* #3D2914 */
+
+    --card: 36 38% 95%;
+    --card-foreground: 28 49% 16%;
+
+    --popover: 36 38% 95%;
+    --popover-foreground: 28 49% 16%;
+
+    /* Antique gold accent */
+    --primary: 36 47% 45%;             /* #A6824A */
+    --primary-foreground: 36 38% 97%;
+    --primary-glow: 36 47% 60%;        /* #C9A76A */
+
+    --secondary: 36 35% 86%;
+    --secondary-foreground: 28 49% 16%;
+
+    --muted: 36 28% 88%;
+    --muted-foreground: 28 27% 28%;
+
+    --accent: 36 47% 60%;
+    --accent-foreground: 28 49% 16%;
+
+    --destructive: 0 65% 47%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 36 35% 80%;              /* #D9C9A8 */
+    --input: 36 35% 80%;
+    --ring: 36 47% 45%;
+
+    --radius: 0.875rem;
+
+    /* Story design tokens (canvas) */
+    --story-bg: 36 35% 91%;
+    --story-text: 28 49% 16%;
+    --story-text-muted: 28 36% 24%;
+    --story-gold: 36 47% 60%;
+    --story-gold-dark: 36 47% 45%;
+    --story-divider: 36 35% 75%;
+
+    --gradient-gold: linear-gradient(135deg, hsl(36 47% 65%), hsl(36 47% 45%) 60%, hsl(28 36% 32%));
+    --gradient-bg: linear-gradient(180deg, hsl(36 35% 93%), hsl(36 30% 86%));
+
+    --shadow-soft: 0 4px 24px -8px hsl(28 49% 16% / 0.10);
+    --shadow-gold: 0 8px 32px -12px hsl(36 47% 35% / 0.30);
+    --shadow-card: 0 2px 16px -4px hsl(28 49% 16% / 0.08);
+    --shadow-story: 0 30px 80px -24px hsl(28 49% 16% / 0.35), 0 8px 24px -8px hsl(28 49% 16% / 0.18);
+
+    --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Montserrat', system-ui, sans-serif;
+    background-image: var(--gradient-bg);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .font-serif {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+}
+
+@layer utilities {
+  .text-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .bg-gold {
+    background: var(--gradient-gold);
+  }
+
+  .shadow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-story {
+    box-shadow: var(--shadow-story);
+  }
+}

@@ -560,16 +560,6 @@ const SortableRow = ({
           type="button"
           variant="ghost"
           size="icon"
-          onClick={onDuplicate}
-          className="h-8 w-7 shrink-0 text-muted-foreground hover:text-foreground"
-          aria-label="Duplikat"
-        >
-          <Copy className="w-3 h-3" />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
           onClick={onDelete}
           className="h-8 w-7 shrink-0 text-destructive hover:text-destructive hover:bg-destructive/10"
           aria-label="Hapus"

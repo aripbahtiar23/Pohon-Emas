@@ -23,6 +23,7 @@ import {
   ChevronDown,
   TrendingUp,
   TrendingDown,
+  Calendar,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -164,12 +165,16 @@ export const StoryForm = ({ data, onChange }: Props) => {
           </div>
           <div className="space-y-2">
             <Label htmlFor="date">Tanggal</Label>
-            <Input
-              id="date"
-              type="date"
-              value={data.date}
-              onChange={(e) => update("date", e.target.value)}
-            />
+            <div className="relative">
+              <Input
+                id="date"
+                type="date"
+                value={data.date}
+                onChange={(e) => update("date", e.target.value)}
+                className="pr-9 relative"
+              />
+              <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+            </div>
           </div>
         </div>
 

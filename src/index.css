@@ -107,14 +107,12 @@
   }
 }
 
-input[type="date"] {
-  display: flex;
-  align-items: center;
-}
-
 input[type="date"]::-webkit-calendar-picker-indicator {
-  margin-left: auto;
-  opacity: 0.5;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2.5rem;
+  height: 100%;
   cursor: pointer;
-  flex-shrink: 0;
 }
